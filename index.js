@@ -1,4 +1,5 @@
 const http = require("http");
+const port = 1000;
 
 http.createServer((req, res) => {
     if(req.url === "/")
@@ -19,6 +20,7 @@ http.createServer((req, res) => {
                     <ul>
                         <li>
                             <a href="/">home</a>
+                            <a href="/posts">posts</a>
                             <a href="/about">about</a>
                             <a href="/contact">contact</a>
                         </li>
@@ -26,6 +28,30 @@ http.createServer((req, res) => {
                 </body>
                 </html>
             `)
+    }
+    else if(req.url === "/posts")
+    {
+        const posts = [
+            {
+                message : "This is the tutorial on how to use response with JSON response format",
+                status: "success"
+            },
+            {
+                message : "This is the tutorial on how to use response with JSON response format",
+                status: "success"
+            },
+            {
+                message : "This is the tutorial on how to use response with JSON response format",
+                status: "success"
+            },
+            {
+                message : "This is the tutorial on how to use response with JSON response format",
+                status: "success"
+            }
+        ]
+
+        res.writeHead(200, {"Content-Type" : "Application/JSON"});
+        res.end(JSON.stringify(posts));
     }
     else if(req.url === "/about")
     {
@@ -45,6 +71,7 @@ http.createServer((req, res) => {
                     <ul>
                         <li>
                             <a href="/">home</a>
+                            <a href="/posts">posts</a>
                             <a href="/about">about</a>
                             <a href="/contact">contact</a>
                         </li>
@@ -71,6 +98,7 @@ http.createServer((req, res) => {
                     <ul>
                         <li>
                             <a href="/">home</a>
+                            <a href="/posts">posts</a>
                             <a href="/about">about</a>
                             <a href="/contact">contact</a>
                         </li>
@@ -87,7 +115,7 @@ http.createServer((req, res) => {
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Not found</title>
+                    <title>error page</title>
                 </head>
                 <body>
                     <h1>This is Error Page</h1>
@@ -96,6 +124,7 @@ http.createServer((req, res) => {
                     <ul>
                         <li>
                             <a href="/">home</a>
+                            <a href="/posts">posts</a>
                             <a href="/about">about</a>
                             <a href="/contact">contact</a>
                         </li>
@@ -104,6 +133,6 @@ http.createServer((req, res) => {
                 </html>
                 `)
     }
-}).listen(1000, () => {
-    console.log("Server running")
+}).listen(port, () => {
+    console.log("Server running at port: ", port)
 })
