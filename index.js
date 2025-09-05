@@ -145,7 +145,21 @@ http.createServer((req, res) => {
             console.log("Received Data: ", body);
 
             res.writeHead(200, {'Content-Type': "Application/JSON"});
-            res.end(JSON.stringify({message: "Received", data:body}))
+            res.end(JSON.stringify({message: "Received", data: JSON.parse(body)}))
+        })
+    }
+    else if(req.method === 'PUT' && req.url === "/update")
+    {
+        let body = '';
+        req.on("data", chunk => {
+            body += chunk.toString();
+        })
+
+        req.on("end", () => {
+            console.log("Received Updated Data: ", body)
+
+            res.writeHead(200, {'Content-Type':"Application/JSON"});
+            res.end(JSON.stringify({message: "Received Updated Data", data: JSON.parse(body)}))
         })
     }
     else {
