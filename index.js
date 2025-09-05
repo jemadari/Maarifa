@@ -21,6 +21,7 @@ http.createServer((req, res) => {
                         <li>
                             <a href="/">home</a>
                             <a href="/posts">posts</a>
+                            <a href="/names">names</a>
                             <a href="/about">about</a>
                             <a href="/contact">contact</a>
                         </li>
@@ -72,6 +73,7 @@ http.createServer((req, res) => {
                         <li>
                             <a href="/">home</a>
                             <a href="/posts">posts</a>
+                            <a href="/names">names</a>
                             <a href="/about">about</a>
                             <a href="/contact">contact</a>
                         </li>
@@ -99,6 +101,7 @@ http.createServer((req, res) => {
                         <li>
                             <a href="/">home</a>
                             <a href="/posts">posts</a>
+                            <a href="/names">names</a>
                             <a href="/about">about</a>
                             <a href="/contact">contact</a>
                         </li>
@@ -106,6 +109,29 @@ http.createServer((req, res) => {
                 </body>
                 </html>
                 `)
+    }
+    else if(req.method === 'GET' && req.url === '/names')
+    {
+        const names = [
+            {
+                name: "Hancy",
+                age: 12
+            },
+            {
+                name: "Lancy",
+                age: 12
+            },
+            {
+                name: "Vancy",
+                age: 12
+            },
+            {
+                name: "Dancy",
+                age: 12
+            },
+        ]
+        res.writeHead(200, {"Content-Type":"Application/JSON"});
+        res.end(JSON.stringify(names));
     }
     else {
         res.writeHead(404, {"Content-Type" : "text/html"})
@@ -125,6 +151,7 @@ http.createServer((req, res) => {
                         <li>
                             <a href="/">home</a>
                             <a href="/posts">posts</a>
+                            <a href="/names">names</a>
                             <a href="/about">about</a>
                             <a href="/contact">contact</a>
                         </li>
