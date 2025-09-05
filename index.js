@@ -132,6 +132,21 @@ http.createServer((req, res) => {
         ]
         res.writeHead(200, {"Content-Type":"Application/JSON"});
         res.end(JSON.stringify(names));
+    } 
+    else if(req.method === 'POST' && req.url === "/submit")
+    {
+        let body = '';
+
+        req.on("data", chunk => {
+            body += chunk.toString();
+        })
+
+        req.on("end", () => {
+            console.log("Received Data: ", body);
+
+            res.writeHead(200, {'Content-Type': "Application/JSON"});
+            res.end(JSON.stringify({message: "Received", data:body}))
+        })
     }
     else {
         res.writeHead(404, {"Content-Type" : "text/html"})
