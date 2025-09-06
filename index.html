@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maarifa | Nyumbani</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #4f46e5;
+      padding: 15px 30px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #3b82f6;
+    }
+
+    /* Mobile menu button */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        background-color: #4f46e5;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .navbar ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Hero section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      background: linear-gradient(to right, #6366f1, #3b82f6);
+      color: white;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      max-width: 600px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      background: white;
+      color: #4f46e5;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #e0e7ff;
+    }
+
+    /* Features section */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #4f46e5;
+    }
+
+    /* Motivation section */
+    .motivation {
+      background: #eef2ff;
+      padding: 60px 20px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .motivation blockquote {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #4f46e5;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111827;
+      color: #9ca3af;
+    }
+
+    footer .social {
+      margin-top: 10px;
+    }
+
+    footer .social a {
+      margin: 0 10px;
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    footer .social a:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">Maarifa</div>
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    <ul id="menu">
+      <li><a href="/">Nyumbani</a></li>
+      <li><a href="about">Kuhusu</a></li>
+      <li><a href="technologies">Teknolojia</a></li>
+      <li><a href="contact">Mawasiliano</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h2>Karibu kwenye Maarifa</h2>
+    <p>Hapa utajifunza jinsi ya kuunda applications kwa kutumia <b>Node.js</b>, <b>Express</b>, na <b>Postgres</b>. Safari ya maarifa inaanza sasa!</p>
+    <button class="btn" onclick="anza()">Anza Kujifunza</button>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features">
+    <div class="card">
+      <h3>Node.js</h3>
+      <p>Jifunze server-side JavaScript na uunde applications zenye nguvu na scalable.</p>
+    </div>
+    <div class="card">
+      <h3>Express</h3>
+      <p>Pata ufahamu wa framework maarufu ya Node.js kwa ajili ya API na web apps.</p>
+    </div>
+    <div class="card">
+      <h3>Postgres</h3>
+      <p>Tambua jinsi ya kutumia database yenye nguvu, salama, na open-source.</p>
+    </div>
+  </section>
+
+  <!-- MOTIVATION SECTION -->
+  <section class="motivation">
+    <blockquote>“Kila expert alianza kama beginner — Maarifa ni mwongozo wako.”</blockquote>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Maarifa Project. Imetengenezwa kwa kujifunza.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
+    }
+
+    function anza() {
+      alert("Karibu! Hii ni sehemu ya mwanzo wa kujifunza Node.js, Express na Postgres.");
+    }
+  </script>
+</body>
+</html>

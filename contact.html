@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maarifa | Mawasiliano</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #4f46e5;
+      padding: 15px 30px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #3b82f6;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        background-color: #4f46e5;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .navbar ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Hero / Motivation */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      background: linear-gradient(to right, #6366f1, #3b82f6);
+      color: white;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+
+    /* Contact Form */
+    .contact {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .contact h3 {
+      margin-bottom: 20px;
+      color: #4f46e5;
+      text-align: center;
+    }
+
+    .contact input, .contact textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .contact button {
+      width: 100%;
+      padding: 12px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .contact button:hover {
+      background: #3b82f6;
+    }
+
+    /* Social Links */
+    .social {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .social a {
+      margin: 0 10px;
+      color: #4f46e5;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: 0.3s;
+    }
+
+    .social a:hover {
+      color: #3b82f6;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111827;
+      color: #9ca3af;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">Maarifa</div>
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    <ul id="menu">
+      <li><a href="/">Nyumbani</a></li>
+      <li><a href="about">Kuhusu</a></li>
+      <li><a href="technologies">Teknolojia</a></li>
+      <li><a href="contact">Mawasiliano</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO / MOTIVATION -->
+  <section class="hero">
+    <h2>Karibu kwenye sehemu ya Mawasiliano</h2>
+    <p>“Kila expert alianza kama beginner — Maarifa ni mwongozo wako.”</p>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact">
+    <h3>Wasiliana Nami</h3>
+    <form onsubmit="submitForm(event)">
+      <input type="text" name="name" placeholder="Jina lako" required>
+      <input type="email" name="email" placeholder="Barua pepe" required>
+      <textarea name="message" placeholder="Ujumbe wako" rows="5" required></textarea>
+      <button type="submit">Tuma Ujumbe</button>
+    </form>
+    
+    <!-- SOCIAL LINKS -->
+    <div class="social">
+      <a href="https://github.com/jemadari" target="_blank">GitHub</a> |
+      <a href="mailto:hassanjemadari@gmail.com">Email</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Maarifa Project. Imetengenezwa kwa kujifunza.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      alert("Asante kwa kuwasiliana! Tutakujibu hivi karibuni.");
+      // Hapa unaweza kuongeza backend submission
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teknolojia | Maarifa Project</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #4f46e5;
+      padding: 15px 30px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #3b82f6;
+    }
+
+    /* Mobile menu button */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        background-color: #4f46e5;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .navbar ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Main container */
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+      color: #4f46e5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111827;
+      color: #9ca3af;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">Maarifa</div>
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    <ul id="menu">
+      <li><a href="/">Nyumbani</a></li>
+      <li><a href="about">Kuhusu</a></li>
+      <li><a href="technologies">Teknolojia</a></li>
+      <li><a href="contact">Mawasiliano</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <div class="section">
+      <h2>Node.js</h2>
+      <p>
+        Node.js ni mazingira (runtime) ya JavaScript yanayokuwezesha kuendesha
+        code za JavaScript nje ya browser. Ni maarufu kwa sababu inaruhusu
+        ujenzi wa <b>server-side applications</b> zinazokuwa na utendaji bora na
+        scalable.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Express</h2>
+      <p>
+        Express ni <b>framework ya Node.js</b> inayorahisisha utengenezaji wa
+        API na web applications. Inakupa njia rahisi ya kuunda routes,
+        middleware, na kushughulikia requests/response bila complexity nyingi.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Postgres (PostgreSQL)</h2>
+      <p>
+        PostgreSQL ni <b>database ya relational</b> yenye nguvu kubwa,
+        open-source, na salama. Inatumika na makampuni makubwa na pia
+        developers binafsi kwa ajili ya kuhifadhi data kwenye applications.
+      </p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Maarifa Project. Imetengenezwa kwa kujifunza.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
