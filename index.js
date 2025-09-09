@@ -1,5 +1,7 @@
 const http = require("http");
 const fs = require("fs");
+const querystring = require("querystring");
+
 const port = 1000;
 
 http.createServer((req, res) => {
@@ -20,6 +22,20 @@ http.createServer((req, res) => {
     else if(req.method === "GET" && req.url === "/contact")
     {
         filename = "contact.html";
+    }
+    else if(req.method === "POST" && req.url === "/submit")
+    {
+        let body = '';
+
+        req.on("data", chunk => {
+            body += chunk.toString();
+        })
+
+        req.on("end", () => {
+            let formData = querystring.parse(body);
+
+            console.log("Form Data: ", JSON.parse(formData));
+        })
     }
     else {
         filename = "404.html";
