@@ -28,6 +28,12 @@ app.get("/api/products", (request, response) => {
     response.status(200).send(products);
 })
 
+// Hii ni namna ya kutumia filter function ili kuweza kufilter data based on your need
+// app.get("/api/products", (request, response) => {
+//     const prod = products.filter((product) => product.name === "Pen")
+//     response.status(200).send(prod);
+// })
+
 app.get("/api/product/:id", (request, response) => {
     const parsedId = parseInt(request.params.id);
     if(isNaN(parsedId))
