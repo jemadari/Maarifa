@@ -1,3 +1,4 @@
+import { parse } from "dotenv";
 import express, { request, response } from "express";
 
 const app = express();
@@ -89,11 +90,30 @@ app.put("/api/product/update/:id", (request, response) => {
 
     const findProductIndex = products.findIndex((product) => product.id === parsedId)
 
-    if(findProductIndex === -1) return response.sendStatus(400);
+    if(findProductIndex === -1) return response.sendStatus(404);
 
     products[findProductIndex] = {id: parsedId, ...body}
 
     return response.sendStatus(200);
+})
+
+app.patch("/api/product/update/:id", (request, response) => {
+    const {
+        body, 
+        params: { id }
+    } = request;
+
+    const parsedId = parseInt(id);
+
+    if(isNaN(parsedId)) return response.sendStatus(400)
+    
+    const findProductIndex = products.findIndex((product) => product.id === parsedId);
+
+    if(findProductIndex === -1) return response.sendStatus(404);
+
+    products[findProductIndex] = { ...products[findProductIndex], ...body }
+
+    return response.sendStatus(200)
 })
 
 app.listen(PORT, () => {
