@@ -116,6 +116,22 @@ app.patch("/api/product/update/:id", (request, response) => {
     return response.sendStatus(200)
 })
 
+app.delete("/api/product/:id", (request, response) => {
+    const { params: { id } } = request;
+
+    const parsedId = parseInt(id);
+
+    if(isNaN(parsedId)) return response.sendStatus(400)
+
+    const findProductIndex = products.findIndex((product) => product.id === parsedId);
+
+    if(findProductIndex === -1) return response.sendStatus(404);
+
+    products.splice(findProductIndex, 1);
+
+    return response.sendStatus(200)
+})
+
 app.listen(PORT, () => {
     console.log(`The server running at port: ${PORT}`)
 })
