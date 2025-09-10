@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express, { request, response } from "express";
 
 const app = express();
 
@@ -58,11 +58,42 @@ app.get("/api/products/filter", (request, response) => {
     response.status(200).send(product)
 })
 
+app.get("/api/product/:id", (request, response) => {
+    const parsedId = parseInt(request.params.id);
+
+    if(isNaN(parsedId)) return response.sendStatus(400);
+
+    const product = products.find((product) => product.id === parsedId)
+
+    if(!product) return response.sendStatus(404)
+
+    return response.status(200).send(product);
+})
+
 app.post("/api/product/create", (request, response) => {
     const { body } = request;
     const newProduct = {id: products[products.length - 1].id + 1, ...body}
     products.push(newProduct)
     return response.status(201).send(newProduct)
+})
+
+app.put("/api/product/update/:id", (request, response) => {
+    const {
+        body, 
+        params: { id }
+    } = request;
+
+    const parsedId = parseInt(id)
+
+    if(isNaN(parsedId)) return response.sendStatus(400)
+
+    const findProductIndex = products.findIndex((product) => product.id === parsedId)
+
+    if(findProductIndex === -1) return response.sendStatus(400);
+
+    products[findProductIndex] = {id: parsedId, ...body}
+
+    return response.sendStatus(200);
 })
 
 app.listen(PORT, () => {
