@@ -2,9 +2,27 @@ import { parse } from "dotenv";
 import express, { request, response } from "express";
 
 const app = express();
-
+const router = express.Router();
 // json middleware
 app.use(express.json())
+
+app.use((request, response, next) => {
+    console.log("This is 1st Middleware")
+    next();
+})
+
+app.use((request, response, next) => {
+    console.log("This is 2nd Middleware")
+    next();
+})
+
+app.use((request, response, next) => {
+    console.log("This is 3rd Middleware")
+})
+
+app.use((request, response, next) => {
+    console.log("This is 4th middleware")
+})
 
 const PORT = process.env.PORT || 3000
 
@@ -32,8 +50,17 @@ app.get("/", (request, response) => {
     }])
 })
 
+router.use("/names", (request, response, next) => {
+    response.send("Hello There Am using Router");
+})
+
 app.get("/api/users", (request, response) => {
     response.send(users);
+})
+
+app.get("/api/users/filter", (request, response) => {
+    const filteredUser = users.filter((user) => user.username === "Liam");
+    return response.status(200).send(filteredUser)
 })
 
 app.get("/api/user/:id", (request, response) => {
@@ -47,6 +74,67 @@ app.get("/api/user/:id", (request, response) => {
         return response.sendStatus(404)
 
     return response.status(200).send(user)
+})
+
+app.post("/api/user/create", (request, response) => {
+    const { body } = request;
+    const newUser = {id: users[users.length - 1].id + 1, ...body}
+    users.push(newUser);
+    return response.status(200).send(newUser)
+})
+
+app.put("/api/user/update/:id", (request, response) => {
+    const {
+        body, 
+        params: {id}
+    } = request;
+
+    const parsedId = parseInt(id);
+
+    if(isNaN(parsedId)) return response.sendStatus(400)
+
+    const findUserIndex = users.findIndex((user) => user.id === parsedId);
+    if(findUserIndex === -1) return response.sendStatus(404);
+
+    users[findUserIndex] = {id: parsedId, ...body}
+
+    return response.sendStatus(200);
+})
+
+app.patch("/api/user/update/:id", (request, response) => {
+    const {
+        body,
+        params: { id }
+    } = request;
+
+    const parsedId = parseInt(id);
+    if(isNaN(parsedId)) return response.sendStatus(400)
+
+    const findUserIndex = users.findIndex((user) => user.id === parsedId);
+
+    if(findUserIndex === -1) return response.sendStatus(404)
+
+    users[findUserIndex] = { ...users[findUserIndex], ...body}
+
+    return response.sendStatus(200)
+})
+
+app.delete("/api/user/:id", (request, response) => {
+    const {
+        params: { id }
+    } = request;
+
+    const parsedId = parseInt(id)
+
+    if(isNaN(parsedId)) return response.sendStatus(400)
+
+    const findUserIndex = users.findIndex((user) => user.id === parsedId);
+
+    if(findUserIndex === -1) return response.sendStatus(404)
+
+    users.splice(findUserIndex, 1)
+
+    return response.sendStatus(200);
 })
 
 app.get("/api/products", (request, response) => {
