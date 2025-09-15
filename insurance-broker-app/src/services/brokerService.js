@@ -1,5 +1,10 @@
 import { createBroker, getBrokersByCompanyId, getCompanyById } from '../models/db.js';
 
+/**
+ * Get All Brokers for a company
+ * @param {*} companyId 
+ * @returns brokers 
+ */
 export const getBrokersByCompanyIdService = async (companyId) => {
     if(!companyId)
     {
@@ -16,6 +21,12 @@ export const getBrokersByCompanyIdService = async (companyId) => {
     return brokers
 };
 
+/**
+ * Create a new broker for a company
+ * @param {*} name 
+ * @param {*} companyId 
+ * @returns newBroker
+ */
 export const createBrokerService = async (name, companyId) => {
     if(!name || name.trim === '')
     {
@@ -34,11 +45,11 @@ export const createBrokerService = async (name, companyId) => {
     }
 
     const brokers = await getBrokersByCompanyId(companyId);
-    const existingBroker = brokers.find((broker) => broker.name === name)
+    const existingBroker = brokers.find((broker) => broker.name === name && broker.company_id === companyId)
 
     if(existingBroker)
     {
-        throw new Error(`Broker with the name: ${name} already exists for this company`);
+        throw new Error(`Broker with the name: ${name} and Company ID: ${companyId} already exists for this company`);
     }
 
     const newBroker = await createBroker(name, companyId);
