@@ -3,20 +3,59 @@ import { createCompany, getAllCompanies, getCompanyById } from '../models/db.js'
 // TODO: Implement these functions using the model queries above
 // They should handle business logic like validation if needed
 
+/**
+ * Get All Companies
+ */
 export const getAllCompaniesService = async () => {
     // TODO: Fetch and return all companies
-    // e.g., return await getAllCompanies();
-    throw new Error('Not implemented yet');
+    const companies = await getAllCompanies();
+
+    if(!companies || companies.length === 0)
+    {
+        throw new Error('No company found');
+    }
+
+    return companies;
 };
 
+/**
+ * Get company by id
+ * @param {*}  id 
+ */
 export const getCompanyByIdService = async (id) => {
-    // TODO: Fetch and return a single company by ID
-    // Handle not found errors
-    throw new Error('Not implemented yet');
+    if(!id)
+    {
+        throw new Error('Company Id is required')
+    }
+
+    const company = await getCompanyById(id)
+
+    if(!company)
+    {
+        throw new Error(`company with id: ${id} is not found`)
+    }
+    
+    return company;
 };
 
+/**
+ * Create Company
+ * @param {*} name 
+ */
 export const createCompanyService = async (name) => {
-    // TODO: Create a new company
-    // Validate name is not empty/duplicate
-    throw new Error('Not implemented yet');
+    if(!name || name.trim === '')
+    {
+        throw new Error('Company name is required');
+    }
+
+    const existingCompany = await getAllCompanies();
+    const exist = existingCompany.find((company) => company.name === name);
+
+    if(exist)
+    {
+        throw new Error(`Company with name: ${name} already exists`);
+    }
+
+    const newCompany = await createCompany(name);
+    return newCompany;
 };
